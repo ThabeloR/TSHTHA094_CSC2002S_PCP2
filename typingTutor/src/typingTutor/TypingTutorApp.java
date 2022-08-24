@@ -27,6 +27,7 @@ public class TypingTutorApp {
 
 	static FallingWord[] words;
 	static WordMover[] wrdShft;
+	static HungryWordMover mover;
 	static CountDownLatch startLatch; //so threads can start at once
 	
 	static AtomicBoolean started;  
@@ -185,11 +186,23 @@ public class TypingTutorApp {
 	public static void createWordMoverThreads() {
 		score.reset();
 	  	//initialize shared array of current words with the words for this game
+		  int max = 5;
+		  int min = 0;
+		  int k =(int)Math.floor(Math.random()*(max-min+1)+min);
 		for (int i=0;i<noWords;i++) {
-			words[i]=new FallingWord(dict.getNewWord(),gameWindow.getValidXpos(),yLimit);
+			if (i==k){
+				words[i]=new FallingWord(dict.getNewWord());
+				words[i].setX(0);
+				words[i].setY(gameWindow.getHeight()/2);
+			}
+			else{
+				words[i]=new FallingWord(dict.getNewWord(),gameWindow.getValidXpos(),yLimit);
+			}
+
 		}
 		//create threads to move them
 	    for (int i=0;i<noWords;i++) {
+				
 	    		wrdShft[i] = new WordMover(words[i],dict,score,startLatch,done,pause);
 	    }
         //word movers waiting on starting line

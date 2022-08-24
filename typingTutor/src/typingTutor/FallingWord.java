@@ -106,6 +106,9 @@ public class FallingWord {
 	public synchronized  void drop(int inc) {
 		setY(y+inc);
 	}
+	public synchronized  void dropx(int inc) {
+		setX(x+inc);
+	}
 	
 	public synchronized  boolean dropped() {
 		return dropped;

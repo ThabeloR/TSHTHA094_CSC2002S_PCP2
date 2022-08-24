@@ -5,7 +5,7 @@
 SRCDIR=src
 BINDIR=bin
 JAVAC=/usr/bin/typingTutor/javac
-JAVA=usr/bin/typingTutor/java
+JAVA=usr/bin/typingTutorjava
 
 $(BINDIR)/%.class: $(SRCDIR)/%.java
 	$(JAVAC) -d $(BINDIR)/ -cp $(BINDIR) $<

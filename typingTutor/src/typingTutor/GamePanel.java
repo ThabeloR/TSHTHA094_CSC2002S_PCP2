@@ -43,7 +43,8 @@ public class GamePanel extends JPanel implements Runnable {
 		    }
 		    else if (!done.get()) {
 		    	for (int i=0;i<noWords;i++){	    	
-		    		g.drawString(words[i].getWord(),words[i].getX()+borderWidth,words[i].getY());	
+		    		g.drawString(words[i].getWord(),words[i].getX()+borderWidth,words[i].getY());
+					
 		    	}
 		    	g.setColor(Color.lightGray); //change colour of pen
 		    	g.fillRect(borderWidth,0,width,borderWidth);

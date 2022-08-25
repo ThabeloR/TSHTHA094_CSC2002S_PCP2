@@ -6,7 +6,7 @@ public class FallingWord {
 	private int y; // postion - height
 	private int maxY; //maximum height
 	private boolean dropped; //flag for if user does not manage to catch word in time
-	
+	static GamePanel gameWindow;
 	private int fallingSpeed; //how fast this word is
 	private static int maxWait=1000;
 	private static int minWait=100;
@@ -84,6 +84,9 @@ public class FallingWord {
 	public synchronized void resetPos() {
 		setY(0);
 	}
+	public synchronized void resetPosY() {
+		setY(150);
+	}
 
 	public synchronized void resetWord() {
 		resetPos();
@@ -92,6 +95,14 @@ public class FallingWord {
 		fallingSpeed=(int)(Math.random() * (maxWait-minWait)+minWait); 
 		//System.out.println(getWord() + " falling speed = " + getSpeed());
 	}
+	public synchronized void resetHungryWord() {
+		resetPosY();
+		word=dict.getNewWord();
+		dropped=false;
+		fallingSpeed=(int)(Math.random() * (maxWait-minWait)+minWait); 
+		//System.out.println(getWord() + " falling speed = " + getSpeed());
+	}
+	
 	
 	public synchronized boolean matchWord(String typedText) {
 		//System.out.println("Matching against: "+text);

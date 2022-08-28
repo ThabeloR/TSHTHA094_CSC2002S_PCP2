@@ -44,7 +44,6 @@ public class CatchWord extends Thread {
 							counter = j;
 						}
 					}
-
 				}
 				if (words[counter].matchWord(target)) {
 					System.out.println( " score! '" + target); //for checking
@@ -52,8 +51,7 @@ public class CatchWord extends Thread {
 					//FallingWord.increaseSpeed();
 					break;
 				}
-			}
-			
+			}		
 		   i++;
 		}
 		

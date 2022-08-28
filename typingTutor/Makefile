@@ -10,8 +10,8 @@ JAVA=usr/bin/typingTutor/java
 $(BINDIR)/%.class: $(SRCDIR)/%.java
 	$(JAVAC) -d $(BINDIR)/ -cp $(BINDIR) $<
 	
-CLASSES=TypingTutorApp.class CatchWorld.class FallingWord.class GamePanel.class Score.class ScoreUpdater.class\
-	 WordDictionary.class WordMover.class
+CLASSES=GamePanel.class  CatchWorld.class FallingWord.class  Score.class ScoreUpdater.class\
+	 WordDictionary.class WordMover.class HungryWordMover.class TypingTutorApp.class 
 
 CLASS_FILES=$(CLASSES:%.class=$(BINDIR)/%.class)
 	

@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
 		    g.clearRect(borderWidth,borderWidth,width,height);//the active space
 		    g.setColor(Color.pink); //change colour of pen
 		    g.fillRect(borderWidth,height,width,borderWidth); //draw danger zone
+			//change the hungry word to green
 
 		    g.setColor(Color.black);
 		    g.setFont(new Font("Arial", Font.PLAIN, 26));
@@ -42,8 +43,17 @@ public class GamePanel extends JPanel implements Runnable {
 		    	
 		    }
 		    else if (!done.get()) {
-		    	for (int i=0;i<noWords;i++){	    	
+		    	for (int i=0;i<noWords;i++){
+					if(i == TypingTutorApp.k){
+						g.setColor(Color.green);
+						g.setFont(new Font("Arial", Font.PLAIN, 26));
+						g.drawString(words[i].getWord(),words[i].getX()+borderWidth,words[i].getY());	
+
+					}
+					else{
+					g.setColor(Color.black);	
 		    		g.drawString(words[i].getWord(),words[i].getX()+borderWidth,words[i].getY());
+					}
 					
 		    	}
 		    	g.setColor(Color.lightGray); //change colour of pen

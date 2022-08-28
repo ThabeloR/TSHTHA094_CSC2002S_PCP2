@@ -18,7 +18,7 @@ public class TypingTutorApp {
 //shared class variables
 	static int noWords=4;
 	static int totalWords;
-
+	static int k;
    	static int frameX=1000;
 	static int frameY=600;
 	static int yLimit=480;
@@ -190,7 +190,7 @@ public class TypingTutorApp {
 	  	//initialize shared array of current words with the words for this game
 		int max = 5;
 		int min = 0;
-		int k =(int)Math.floor(Math.random()*(max-min+1)+min);
+		k =(int)Math.floor(Math.random()*(max-min+1)+min);
 		for (int i=0;i<noWords;i++) {
 			if (i==k){
 				words[i]=new FallingWord(dict.getNewWord());
@@ -204,14 +204,11 @@ public class TypingTutorApp {
 		//create threads to move them
 	    for (int i=0;i<noWords;i++) {
 			if (i==k){
-
 				mover = new HungryWordMover(words[i],dict,score,startLatch,done,pause);
 			}
-			else{
-				
+			else{			
 	    		wrdShft[i] = new WordMover(words[i],dict,score,startLatch,done,pause);
 			}
-
 	    }
         //word movers waiting on starting line
      	for (int i=0;i<noWords;i++) {
@@ -220,7 +217,15 @@ public class TypingTutorApp {
 			}else{
      		wrdShft[i] .start();
 			}
+			if(words[k].getY() == words[i].getY() ){
+				for (int j = words[k].getX() -6; j<= words[k].getX() +6; j++ ){
+					System.out.println(words[k].getX()+"  "+ words[i].getX());
+					words[i].setY(1000);
+				}
+			}
+
      	}
+		
 	}
 	
 public static String[] getDictFromFile(String filename) {

@@ -38,7 +38,7 @@ public class HungryWordMover extends Thread {
 		System.out.println(myWord.getWord() + " started" );
 		while (!done.get()) {				
 			//animate the word
-			while (!myWord.dropped() && !done.get()) {
+			while (!myWord.droppedx() && !done.get()) {
 				    myWord.dropx(10);
 					try {
 						sleep(myWord.getSpeed());
@@ -48,12 +48,11 @@ public class HungryWordMover extends Thread {
 					};		
 					while(pause.get()&&!done.get()) {};
 			}
-			if (!done.get() && myWord.dropped()) {
+			if (!done.get() && myWord.droppedx()) {
 				score.missedWord();
 				myWord.resetHungryWord();
 			}
 			myWord.resetHungryWord();
 		}
 	}
-	
 }

@@ -5,10 +5,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class HungryWordMover extends Thread {
 	private FallingWord myWord;
+	private FallingWord[] words;
 	private AtomicBoolean done;
 	private AtomicBoolean pause; 
 	private Score score;
 	CountDownLatch startLatch; //so all can start at once
+
 	
 	HungryWordMover( FallingWord word) {
 		myWord = word;
@@ -21,6 +23,17 @@ public class HungryWordMover extends Thread {
 		this.score=score;
 		this.done=d;
 		this.pause=p;
+	
+	}
+
+	HungryWordMover( FallingWord word,WordDictionary dict, Score score,
+			CountDownLatch startLatch, AtomicBoolean d, AtomicBoolean p, FallingWord[] words ) {
+		this(word);
+		this.startLatch = startLatch;
+		this.score=score;
+		this.done=d;
+		this.pause=p;
+		this.words = words;
 	}
 	
 	

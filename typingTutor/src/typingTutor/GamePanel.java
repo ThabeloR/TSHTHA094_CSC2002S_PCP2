@@ -12,7 +12,7 @@ public class GamePanel extends JPanel implements Runnable {
 		private AtomicBoolean done ; //REMOVE
 		private AtomicBoolean started ; //REMOVE
 		private AtomicBoolean won ; //REMOVE
-
+		private WordDictionary dict = new WordDictionary();
 		private FallingWord[] words;
 		private int noWords;
 		private final static int borderWidth=25; //appearance - border
@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable {
 		    }
 		    else if (!done.get()) {
 		    	for (int i=0;i<noWords;i++){
-					if(i == TypingTutorApp.k){
+					if(dict.isHungry().equals(words[i].getWord())){
 						g.setColor(Color.green);
 						g.setFont(new Font("Arial", Font.PLAIN, 26));
 						g.drawString(words[i].getWord(),words[i].getX()+borderWidth,words[i].getY());	

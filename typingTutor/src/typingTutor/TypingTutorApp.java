@@ -18,7 +18,6 @@ public class TypingTutorApp {
 //shared class variables
 	static int noWords=4;
 	static int totalWords;
-	static int k;
    	static int frameX=1000;
 	static int frameY=600;
 	static int yLimit=480;
@@ -27,7 +26,7 @@ public class TypingTutorApp {
 
 	static FallingWord[] words;
 	static WordMover[] wrdShft;
-	static HungryWordMover[] wrdShift;
+	static HungryWordMover wrdShift;
 	static CountDownLatch startLatch; //so threads can start at once
 
 	static AtomicBoolean started;  
@@ -137,7 +136,7 @@ public class TypingTutorApp {
 					     		try {
 					     			if (wrdShft[i].isAlive())	{
 									wrdShft[i].join();
-									wrdShift[i].join();
+									wrdShift.join();
 								}
 								} catch (InterruptedException e1) {
 									// TODO Auto-generated catch block
@@ -189,17 +188,20 @@ public class TypingTutorApp {
 		score.reset();
 	  	//initialize shared array of current words with the words for this game
 		for (int i=0;i<noWords;i++) {
-				words[i]=new FallingWord(dict.getNewWord(),gameWindow.getValidXpos(),yLimit);
+			words[i]=new FallingWord(dict.getNewWord(),gameWindow.getValidXpos(),yLimit);
+			
 		}
 		//create threads to move them
 	    for (int i=0;i<noWords;i++) {
-	    		wrdShft[i] = new WordMover(words[i],dict,score,startLatch,done,pause);
-				wrdShift[i] = new HungryWordMover(words[i],dict,score,startLatch,done,pause,words);
-	    }
+			if (dict.isHungry().equals(words[i].getWord())){
+				wrdShift = new HungryWordMover(words[i],dict,score,startLatch,done,pause,words);
+			}
+			wrdShft[i] = new WordMover(words[i],dict,score,startLatch,done,pause);
+		}		
         //word movers waiting on starting line
      	for (int i=0;i<noWords;i++) {
      		wrdShft[i] .start();
-			wrdShift[i].start();
+			wrdShift.start();
 
      	}
 		

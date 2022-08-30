@@ -18,7 +18,7 @@ CLASS_FILES=$(CLASSES:%.class=$(BINDIR)/%.class)
 
 default: $(CLASS_FILES)
 	
-run: $(CLASS_FILES)	$(JAVA) -cp $(BINDIR) TypingTutorApp 
+run: /usr/java -jar TTworking.jar
 	
 clean:
 	rm $(BINDIR)/*.class

@@ -12,7 +12,7 @@ public class GamePanel extends JPanel implements Runnable {
 		private AtomicBoolean done ; //REMOVE
 		private AtomicBoolean started ; //REMOVE
 		private AtomicBoolean won ; //REMOVE
-		private WordDictionary dict = new WordDictionary();
+
 		private FallingWord[] words;
 		private int noWords;
 		private final static int borderWidth=25; //appearance - border
@@ -32,7 +32,6 @@ public class GamePanel extends JPanel implements Runnable {
 		    g.clearRect(borderWidth,borderWidth,width,height);//the active space
 		    g.setColor(Color.pink); //change colour of pen
 		    g.fillRect(borderWidth,height,width,borderWidth); //draw danger zone
-			//change the hungry word to green
 
 		    g.setColor(Color.black);
 		    g.setFont(new Font("Arial", Font.PLAIN, 26));
@@ -44,17 +43,16 @@ public class GamePanel extends JPanel implements Runnable {
 		    }
 		    else if (!done.get()) {
 		    	for (int i=0;i<noWords;i++){
-					if(dict.isHungry().equals(words[i].getWord())){
+					if(words[i].equals(TypingTutorApp.hungrywWord)){
 						g.setColor(Color.green);
 						g.setFont(new Font("Arial", Font.PLAIN, 26));
-						g.drawString(words[i].getWord(),words[i].getX()+borderWidth,words[i].getY());	
-
-					}
-					else{
-					g.setColor(Color.black);	
-		    		g.drawString(words[i].getWord(),words[i].getX()+borderWidth,words[i].getY());
-					}
-					
+						g.drawString(words[i].getWord(),words[i].getX()+borderWidth,words[i].getY());
+					}else{
+						g.setColor(Color.black);
+						g.setFont(new Font("Arial", Font.PLAIN, 26));    	
+						g.drawString(words[i].getWord(),words[i].getX()+borderWidth,words[i].getY());
+					}	
+	
 		    	}
 		    	g.setColor(Color.lightGray); //change colour of pen
 		    	g.fillRect(borderWidth,0,width,borderWidth);

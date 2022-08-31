@@ -4,14 +4,13 @@ public class FallingWord {
 	private String word; // the word
 	private int x; //position - width
 	private int y; // postion - height
-	static GamePanel gameWindow;
 	private int maxY; //maximum height
 	private boolean dropped; //flag for if user does not manage to catch word in time
-	private boolean droppedx;
+	private boolean droppedx; //flag for if user does not manage to catch word in time
+	
 	private int fallingSpeed; //how fast this word is
 	private static int maxWait=1000;
 	private static int minWait=100;
-
 	public static WordDictionary dict;
 	
 	FallingWord() { //constructor with defaults
@@ -33,6 +32,7 @@ public class FallingWord {
 		this.x=x; //only need to set x, word is at top of screen at start
 		this.maxY=maxY;
 	}
+	
 	
 	public static void increaseSpeed( ) {
 		minWait+=50;
@@ -89,9 +89,9 @@ public class FallingWord {
 	public synchronized void resetPos() {
 		setY(0);
 	}
-	public synchronized void resetPosY() {
-		setY(300);
-		setX(0);
+	public synchronized void resetPosx() {
+		setX(-400);
+		setY(260);
 	}
 
 	public synchronized void resetWord() {
@@ -101,19 +101,19 @@ public class FallingWord {
 		fallingSpeed=(int)(Math.random() * (maxWait-minWait)+minWait); 
 		//System.out.println(getWord() + " falling speed = " + getSpeed());
 	}
-	public synchronized void resetHungryWord() {
-		resetPosY();
+	public synchronized void resetWordx() {
+		resetPosx();
 		word=dict.getNewWord();
 		droppedx=false;
 		fallingSpeed=(int)(Math.random() * (maxWait-minWait)+minWait); 
 		//System.out.println(getWord() + " falling speed = " + getSpeed());
 	}
 	
-	
 	public synchronized boolean matchWord(String typedText) {
 		//System.out.println("Matching against: "+text);
 		if (typedText.equals(this.word)) {
 			resetWord();
+			resetWordx();
 			return true;
 		}
 		else
@@ -123,13 +123,14 @@ public class FallingWord {
 	public synchronized  void drop(int inc) {
 		setY(y+inc);
 	}
-	public synchronized  void dropx(int inc) {
-		setX(x+inc);
-	}
 	
 	public synchronized  boolean dropped() {
 		return dropped;
 	}
+	public synchronized  void dropx(int inc) {
+		setX(x+inc);
+	}
+	
 	public synchronized  boolean droppedx() {
 		return droppedx;
 	}

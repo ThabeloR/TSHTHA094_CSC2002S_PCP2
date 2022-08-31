@@ -1,0 +1,45 @@
+
+*** These modified files were found in JOE when it aborted on Wed Aug 31 15:18:43 2022
+*** JOE was aborted because the terminal closed
+
+*** File 'Makefile'
+JAVAC=/usr/bin/javac
+.SUFFIXES: .java .class
+SRCDIR=src/typingTutor
+BINDIR=bin
+
+$(BINDIR)/%.class:$(SRCDIR)/%.java
+	$(JAVAC) -d $(BINDIR)/ -cp $(BINDIR) $<
+CLASSES=Score.class ScoreUpdater.class WordDictionary.class FallingWord.class CatchWord.class GamePanel.class WordMover.class HungryWordMover.class TypingTutorApp.class 
+
+
+CLASS_FILES=$(CLASSES:%.class=$(BINDIR)/%.class)
+
+default: $(CLASS_FILES)
+
+clean:
+	rm $(BINDIR)/*.class
+jar: $(CLASS_FILES)
+	@echo "Manifest-Version: 1.0" > manifest.txt
+	@echo "Class-Path: ." >> manifest.txt
+	@echo "Main-Class: bin.typingTutor.typingTutorApp" >> manifest.txt
+	@echo "" >> manifest.txt
+
+	jar -cmf manifest.txt typingT.jar $(CLASS_FILES)
+run: $(CLASS_FILES)
+	java -cp bin typingTutor.TypingTutorApp
+run1: $(CLASS_FILES)
+	java -cp bin typingTutor.TypingTutorApp $(argument)
+run2: $(CLASS_FILES)
+	java -cp bin typingTutor.TypingTutorApp 30 5 words.txt
+
+*** File '(Unnamed)'
+Makefile
+/var/tmp/customXXdS7fNV.conf
+Makefile
+
+*** File '* Startup Log *'
+Processing '/etc/joe/joerc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/joerc

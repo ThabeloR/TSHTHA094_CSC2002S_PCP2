@@ -55,8 +55,8 @@ public class FallingWord {
 	}
 	
 	public synchronized  void setX(int x) {
-		if (x > 1000){
-			x=1000;
+		if (x > TypingTutorApp.gameWindow.getWidth()){
+			x=TypingTutorApp.gameWindow.getWidth();
 			droppedx=true;
 		}
 		this.x=x;
@@ -90,7 +90,7 @@ public class FallingWord {
 		setY(0);
 	}
 	public synchronized void resetPosx() {
-		setX(-400);
+		setX(-200);
 		setY(260);
 	}
 

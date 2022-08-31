@@ -34,7 +34,7 @@ public class HungryWordMover extends Thread {
 		this.words = words;
     }
 	
-	public void run() {
+	public synchronized void run() {
 
 		//System.out.println(myWord.getWord() + " falling speed = " + myWord.getSpeed());
 		try {
@@ -55,10 +55,18 @@ public class HungryWordMover extends Thread {
 						if(!words[i].equals(TypingTutorApp.hungrywWord)){
 							if (words[i].getY() == myWord.getY()){
 								//System.out.println("The hungry word is at " + myWord.getY()+ "the other at"+ words[i].getY());
-										if( words[i].getX() >= myWord.getX()-myWord.getWord().length() && words[i].getX() <= myWord.getX()+ myWord.getWord().length() ){
-											score.missedWord();
-											words[i].resetWord();
-										}
+								if(myWord.getX()+myWord.getWord().length()/4 -words[i].getX() <1)
+								{
+									score.missedWord();
+									words[i].resetWord();
+								}
+								//to the left
+								if(myWord.getWord().length()/4-myWord.getX() +words[i].getX() <1)
+								{
+									score.missedWord();
+									words[i].resetWord();
+								}
+										
 
 							}
 						}
